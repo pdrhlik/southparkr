@@ -1,24 +1,41 @@
-fetch_ratings <- function() {
-	# South Park episode list with user ratings
-	rating_url <- "http://www.imdb.com/title/tt0121955/eprate"
+#' Fetch IMDB ratings for one season.
+#'
+#' @param season_number
+#'
+#' @export
+fetch_season_ratings <- function(season_number) {
+	rating_url <- paste0("https://www.imdb.com/title/tt0121955/episodes?season=", season_number)
+	html <- rvest::read_html(rating_url)
 
-	ratings_table <- rating_url %>%
-		read_html() %>%
-		html_nodes("#tn15content table") %>%
-		`[[`(1) %>%
-		html_table() %>%
-		# Only keep columns that have names
-		select(matches("."))
-
-	colnames(ratings_table) <- c("season_episode", "episode_name", "user_rating", "user_votes")
-
-	ratings <- ratings_table %>%
-		mutate(
-			user_votes = as.integer(sub(",", "", user_votes)),
-			season_number = as.integer(str_extract(season_episode, "^\\d+")),
-			episode_number = as.integer(str_extract(str_trim(season_episode), "\\d+$"))
-		) %>%
-		select(-season_episode)
+	ratings <- dplyr::data_frame(
+		season_number = season_number,
+		season_episode_number = rvest::html_nodes(html, ".list_item .image div div") %>%
+			rvest::html_text() %>%
+			stringr::str_extract("\\d+$") %>%
+			as.numeric(),
+		episode_name = rvest::html_nodes(html, ".list_item .info strong a") %>%
+			rvest::html_text(),
+		air_date = rvest::html_nodes(html, ".list_item .info .airdate") %>%
+			rvest::html_text() %>%
+			lubridate::dmy(),
+		user_rating = rvest::html_nodes(html, "#episodes_content > div.clear > div.list.detail.eplist > div.list_item > div.info > div.ipl-rating-widget > div.ipl-rating-star > span.ipl-rating-star__rating") %>%
+			rvest::html_text() %>%
+			as.numeric(),
+		user_votes = rvest::html_nodes(html, "#episodes_content > div.clear > div.list.detail.eplist > div.list_item > div.info > div.ipl-rating-widget > div.ipl-rating-star > span.ipl-rating-star__total-votes") %>%
+			rvest::html_text() %>%
+			stringr::str_replace_all("[^0-9]", "") %>%
+			as.numeric()
+	)
 
 	return(ratings)
+}
+
+#' Fetch ratings for all selected seasons.
+#'
+#' @param season_numbers
+#' @export
+fetch_ratings <- function(season_numbers) {
+	result <- purrr::map_df(season_numbers, fetch_season_ratings)
+
+	return(result)
 }
