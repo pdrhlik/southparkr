@@ -1,3 +1,37 @@
+#' Fetch episode list for a season data_frame.
+#'
+#' @param season_link
+#' @param season_name
+#' @param season_number
+#' @param season_year
+#'
+#' @return data_frame
+#' @export
+fetch_season_episode_list <- function(season_link, season_name, season_number, season_year) {
+	base_url <- "http://southpark.wikia.com"
+
+	episode_nodes <- season_link %>%
+		xml2::read_html() %>%
+		rvest::html_nodes(".wikia-gallery-item .lightbox-caption a")
+
+	episode_links <- episode_nodes %>%
+		rvest::html_attr(name = "href")
+	episode_links <- paste0(base_url, episode_links)
+
+	episode_names <- episode_nodes %>%
+		rvest::html_text()
+
+	dplyr::data_frame(
+		season_name = season_name,
+		season_number = season_number,
+		season_year = season_year,
+		season_episode_number = seq_along(episode_links),
+		season_link = season_link,
+		episode_link = episode_links,
+		episode_name = episode_names
+	)
+}
+
 #' Fetch episode list.
 #'
 #' @export
@@ -19,32 +53,12 @@ fetch_episode_list <- function() {
 
 	seasons <- dplyr::data_frame(
 		season_name = season_names,
+		season_number = seq_along(season_names),
 		season_link = season_links,
 		season_year = seq(1997, 1997 + length(season_names) - 1)
 	)
 
-	for (i_season in 1:nrow(seasons)) {
-		episode_nodes <- seasons$season_link[i_season] %>%
-			xml2::read_html() %>%
-			rvest::html_nodes(".wikia-gallery-item .lightbox-caption a")
-
-		episode_links <- episode_nodes %>%
-			rvest::html_attr(name = "href")
-		episode_links <- paste0(base_url, episode_links)
-
-		episode_names <- episode_nodes %>%
-			rvest::html_text()
-
-		all_episode_links <- dplyr::bind_rows(all_episode_links, dplyr::data_frame(
-			season_name = seasons$season_name[i_season],
-			season_number = i_season,
-			season_year = seasons$season_year[i_season],
-			season_episode_number = seq_along(episode_links),
-			season_link = seasons$season_link[i_season],
-			episode_link = episode_links,
-			episode_name = episode_names
-		))
-	}
+	all_episode_links <- purrr::pmap_df(as.list(seasons), fetch_season_episode_list)
 
 	return(all_episode_links)
 }
