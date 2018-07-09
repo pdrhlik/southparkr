@@ -68,7 +68,12 @@ fetch_episode <- function(episode_link) {
 		xml2::read_html() %>%
 		rvest::html_nodes("table:nth-of-type(1)") %>%
 		rvest::html_table(fill = TRUE) %>%
-		`[[`(2)
+		`[[`(2) %>%
+		dplyr::mutate(episode_link = episode_link) %>%
+		dplyr::rename(
+			character = X1,
+			text = X2
+		)
 
 	return(episode)
 }
@@ -81,29 +86,10 @@ fetch_episode <- function(episode_link) {
 fetch_all_episodes <- function(episode_list) {
 	episodes <- list()
 
-	for (i_episode in 1:nrow(episode_list)) {
-		fetched_episode <- fetch_episode(episode_list$episode_link[i_episode])
-
-		episodes[[i_episode]] <- dplyr::data_frame(
-			season = episode_list$season_name[i_episode],
-			season_number = episode_list$season_number[i_episode],
-			season_episode_number = episode_list$season_episode_number[i_episode],
-			episode = episode_list$episode_name[i_episode],
-			episode_number = i_episode,
-			character = fetched_episode$X1,
-			text = fetched_episode$X2,
-			year = episode_list$season_year[i_episode]
-		)
-	}
-
-	episodes <- dplyr::bind_rows(episodes)
-
-	episodes <- dplyr::mutate(
-			episodes,
-			season = factor(season),
-			episode = factor(episode)
-		) %>%
-		dplyr::filter(nchar(text) > 0)
+	episodes <- purrr::map_df(episode_list$episode_link, fetch_episode) %>%
+		dplyr::left_join(episode_list, by = "episode_link") %>%
+		dplyr::filter(nchar(character) & nchar(text) > 0) %>%
+		select(-X3)
 
 	return(episodes)
 }
