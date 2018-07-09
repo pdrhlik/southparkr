@@ -84,8 +84,6 @@ fetch_episode <- function(episode_link) {
 #'
 #' @export
 fetch_all_episodes <- function(episode_list) {
-	episodes <- list()
-
 	episodes <- purrr::map_df(episode_list$episode_link, fetch_episode) %>%
 		dplyr::left_join(episode_list, by = "episode_link") %>%
 		dplyr::filter(nchar(character) & nchar(text) > 0) %>%
