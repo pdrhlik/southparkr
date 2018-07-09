@@ -20,8 +20,7 @@ process_episode_words <- function(lines, ratings) {
 	episode_words <- lines %>%
 		dplyr::mutate(
 			character = preprocess_characters(character),
-			text = preprocess_text(text),
-			line_number = row_number()
+			text = preprocess_text(text)
 		) %>%
 		tidytext::unnest_tokens(word, text) %>%
 		dplyr::anti_join(tidytext::stop_words, by = "word") %>%
