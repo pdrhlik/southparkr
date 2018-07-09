@@ -2,16 +2,16 @@
 % Please edit documentation in R/southpark_crawler.R
 \name{fetch_season_episode_list}
 \alias{fetch_season_episode_list}
-\title{Fetch episode list for a season data_frame.}
+\title{Fetch episode list for a season}
 \usage{
-fetch_season_episode_list(season_link, season_name, season_number, season_year)
+fetch_season_episode_list(season_link)
 }
 \arguments{
-\item{season_year}{}
+\item{season_link}{Link to a page of season scripts.}
 }
 \value{
 data_frame
 }
 \description{
-Fetch episode list for a season data_frame.
+Fetch episode list for a season
 }

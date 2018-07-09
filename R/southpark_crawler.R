@@ -1,35 +1,29 @@
-#' Fetch episode list for a season data_frame.
+#' Fetch episode list for a season
 #'
-#' @param season_link
-#' @param season_name
-#' @param season_number
-#' @param season_year
+#' @param season_link Link to a page of season scripts.
 #'
 #' @return data_frame
 #' @export
-fetch_season_episode_list <- function(season_link, season_name, season_number, season_year) {
+fetch_season_episode_list <- function(season_link) {
 	base_url <- "http://southpark.wikia.com"
 
-	episode_nodes <- season_link %>%
-		xml2::read_html() %>%
+	episode_nodes <- xml2::read_html(season_link) %>%
 		rvest::html_nodes(".wikia-gallery-item .lightbox-caption a")
 
 	episode_links <- episode_nodes %>%
 		rvest::html_attr(name = "href")
+
 	episode_links <- paste0(base_url, episode_links)
 
 	episode_names <- episode_nodes %>%
 		rvest::html_text()
 
-	dplyr::data_frame(
-		season_name = season_name,
-		season_number = season_number,
-		season_year = season_year,
+	return(dplyr::data_frame(
 		season_episode_number = seq_along(episode_links),
 		season_link = season_link,
 		episode_link = episode_links,
 		episode_name = episode_names
-	)
+	))
 }
 
 #' Fetch episode list.
@@ -58,7 +52,8 @@ fetch_episode_list <- function() {
 		season_year = seq(1997, 1997 + length(season_names) - 1)
 	)
 
-	all_episode_links <- purrr::pmap_df(as.list(seasons), fetch_season_episode_list)
+	all_episode_links <- purrr::map_df(season_links, fetch_season_episode_list) %>%
+		dplyr::left_join(seasons, by = "season_link")
 
 	return(all_episode_links)
 }
