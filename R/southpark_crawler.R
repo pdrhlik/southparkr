@@ -1,10 +1,3 @@
-library(tidyverse)
-library(tidytext)
-library(rvest)
-library(stringr)
-library(SnowballC)
-library(broom)
-
 #' Fetch episode list.
 #'
 #' @export
@@ -14,7 +7,7 @@ fetch_episode_list <- function() {
 	all_episode_links <- dplyr::data_frame()
 
 	season_nodes <- scipts_url %>%
-		rvest::read_html() %>%
+		xml2::read_html() %>%
 		rvest::html_nodes(".wikia-gallery-item .lightbox-caption a")
 
 	season_links <- season_nodes %>%
@@ -32,7 +25,7 @@ fetch_episode_list <- function() {
 
 	for (i_season in 1:nrow(seasons)) {
 		episode_nodes <- seasons$season_link[i_season] %>%
-			rvest::read_html() %>%
+			xml2::read_html() %>%
 			rvest::html_nodes(".wikia-gallery-item .lightbox-caption a")
 
 		episode_links <- episode_nodes %>%
@@ -63,7 +56,7 @@ fetch_episode_list <- function() {
 #' @export
 fetch_episode <- function(episode_link) {
 	episode <- episode_link %>%
-		rvest::read_html() %>%
+		xml2::read_html() %>%
 		rvest::html_nodes("table:nth-of-type(1)") %>%
 		rvest::html_table(fill = TRUE) %>%
 		`[[`(2)

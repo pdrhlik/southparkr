@@ -5,7 +5,7 @@
 #' @export
 fetch_season_ratings <- function(season_number) {
 	rating_url <- paste0("https://www.imdb.com/title/tt0121955/episodes?season=", season_number)
-	html <- rvest::read_html(rating_url)
+	html <- xml2::read_html(rating_url)
 
 	ratings <- dplyr::data_frame(
 		season_number = season_number,
