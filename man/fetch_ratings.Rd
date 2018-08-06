@@ -2,10 +2,40 @@
 % Please edit documentation in R/imdb_ratings.R
 \name{fetch_ratings}
 \alias{fetch_ratings}
-\title{Fetch ratings for all selected seasons.}
+\title{Fetch IMDB ratings for all South Park episodes.}
 \usage{
-fetch_ratings(season_numbers)
+fetch_ratings(force_download = FALSE, make_rds = TRUE,
+  delete_files = FALSE)
+}
+\arguments{
+\item{force_download}{If \code{TRUE} (default \code{FALSE}), download new IMDB files even
+if there are cached files.}
+
+\item{make_rds}{If \code{TRUE} (default \code{TRUE}), automatically saves fetched and parsed
+data to \emph{ratings.rds} in a current working directory.}
+
+\item{delete_files}{If \code{TRUE} (default \code{FALSE}), deletes downloaded files after
+processing.}
+}
+\value{
+Data frame with following columns:
+  \describe{
+    \item{episode_imdb_id}{IMDB ID that identifies an episode, movie or TV show.}
+    \item{season_number}{Season number.}
+    \item{season_episode_number}{Episode number in a season.}
+    \item{episode_name}{Name of the episode.}
+    \item{air_date}{Year when the episode aired.}
+    \item{user_rating}{Weighted average of user ratings.}
+    \item{user_votes}{Number of user votes.}
+  }
 }
 \description{
-Fetch ratings for all selected seasons.
+Downloads and parses basic information and ratings
+about every South Park episode. It uses the only
+official way that allows you to get data directly
+from IMDB - \url{https://datasets.imdbws.com/}.
+}
+\details{
+The function downloads, parses and joins three of these files:
+\emph{title.episode.tsv.gz}, \emph{title.basics.tsv.gz} and \emph{title.ratings.tsv.gz}.
 }
