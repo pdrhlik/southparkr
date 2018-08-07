@@ -34,7 +34,8 @@ process_episode_words <- function(lines, ratings, keep_stopwords = FALSE) {
 			by = c("season_number" = "season_number",
 				   "season_episode_number" = "season_episode_number")
 		) %>%
-		dplyr::left_join(tidytext::get_sentiments("afinn"))
+		dplyr::left_join(tidytext::get_sentiments("afinn")) %>%
+		rename(sentiment_score = score)
 
 	if (keep_stopwords == FALSE) {
 		episode_words <- dplyr::anti_join(episode_words, tidytext::stop_words, by = "word")
