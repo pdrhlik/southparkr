@@ -6,6 +6,12 @@
 \usage{
 preprocess_text(text)
 }
+\arguments{
+\item{text}{Character vector of text lines.}
+}
+\value{
+Modified character vector.
+}
 \description{
 Preprocess text to keep only alphanum character, spaces and apostrophes.
 }

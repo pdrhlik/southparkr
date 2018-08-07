@@ -1,8 +1,13 @@
-#' Plot comparison of naughty words proportion among selected characters.
+#' Plot comparison of swear words proportion among selected characters.
 #'
-#' @param main_character
-#' @param words
-#' @param other_characters
+#' It uses the \code{\link{compare_two_characters}} function but
+#'   compares more than two characters at once. After that, it
+#'   draws an errorbar plot to visually compare the results.
+#'
+#' @param main_character South Park character to compare with others.
+#' @param other_characters Character vector of other characters.
+#' @param words A data frame of words from \code{\link{process_episode_words}}.
+#' @param text_size Numeric value that controls ggplot's text size.
 #'
 #' @export
 plot_swear_word_comparison <- function(main_character, other_characters, words, text_size = 30) {
@@ -30,10 +35,9 @@ plot_swear_word_comparison <- function(main_character, other_characters, words, 
 
 #' Plots sentiment over episodes for selected characters.
 #'
-#' @param words
-#' @param characters
+#' @param words A data frame of words from \code{\link{process_episode_words}}.
+#' @param characters Character vector of characters.
 #'
-#' @return
 #' @export
 plot_character_sentiment <- function(words, characters) {
 	by_character_episode <- words %>%

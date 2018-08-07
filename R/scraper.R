@@ -1,8 +1,12 @@
 #' Fetch episode list for a season
 #'
+#' @description NULL
+#'
 #' @param season_link Link to a page of season scripts.
 #'
-#' @return data_frame
+#' @seealso \code{\link{episode_list}} dataset.
+#'
+#' @return Data frame with list of episodes.
 #' @export
 fetch_season_episode_list <- function(season_link) {
 	base_url <- "http://southpark.wikia.com"
@@ -26,8 +30,12 @@ fetch_season_episode_list <- function(season_link) {
 	))
 }
 
-#' Fetch episode list.
+#' Fetch list of all episodes.
 #'
+#' @description NULL
+#'
+#' @seealso \code{\link{episode_list}} dataset.
+#' @return Data frame with list of episodes.
 #' @export
 fetch_episode_list <- function() {
 	base_url <- "http://southpark.wikia.com"
@@ -58,10 +66,14 @@ fetch_episode_list <- function() {
 	return(all_episode_links)
 }
 
-#' Fetch transcript for a single episode.
+#' Fetch script for a single episode.
 #'
-#' @param episode_link
+#' @description NULL
 #'
+#' @param episode_link Link to a page with an episode script.
+#'
+#' @seealso \code{\link{episode_lines}} dataset.
+#' @return A data frame with episode lines.
 #' @export
 fetch_episode <- function(episode_link) {
 	episode <- episode_link %>%
@@ -78,10 +90,13 @@ fetch_episode <- function(episode_link) {
 	return(episode)
 }
 
-#' Fetch transcripts for all episodes.
+#' Fetch scripts for all episodes.
 #'
-#' @param episode_list
+#' @description NULL
+#' @param episode_list \code{\link{episode_list}} dataset.
 #'
+#' @seealso \code{\link{episode_lines}} dataset.
+#' @return A data frame with episode lines.
 #' @export
 fetch_all_episodes <- function(episode_list) {
 	episodes <- purrr::map_df(episode_list$episode_link, fetch_episode) %>%
@@ -94,7 +109,12 @@ fetch_all_episodes <- function(episode_list) {
 
 #' Preprocess character names.
 #'
-#' @param characters
+#' This function strips semicolons and double
+#'   quotes from character names. It also converts
+#'   all characters to lower case.
+#'
+#' @param characters Character vector.
+#' @return Modified character vector.
 preprocess_characters <- function(characters) {
 	result <- characters %>%
 		stringr::str_replace_all("[:\"]", "") %>%
@@ -105,7 +125,8 @@ preprocess_characters <- function(characters) {
 
 #' Preprocess text to keep only alphanum character, spaces and apostrophes.
 #'
-#' @param text
+#' @param text Character vector of text lines.
+#' @return Modified character vector.
 preprocess_text <- function(text) {
 	result <- text %>%
 		# Erase all text parts in [] brackets

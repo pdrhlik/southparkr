@@ -6,6 +6,14 @@
 \usage{
 fetch_ratings_old(season_numbers)
 }
+\arguments{
+\item{season_number}{Numeric season number.}
+}
 \description{
-Fetch ratings for all selected seasons.
+**DO NOT USE** - it violates IMDB conditions of use. It does
+  not allow web scraping. It provides datasets that can
+  be parsed accordingly.
+}
+\seealso{
+\code{\link{fetch_ratings}()} - use this function insted.
 }

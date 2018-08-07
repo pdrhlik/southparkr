@@ -6,6 +6,14 @@
 \usage{
 preprocess_characters(characters)
 }
+\arguments{
+\item{characters}{Character vector.}
+}
+\value{
+Modified character vector.
+}
 \description{
-Preprocess character names.
+This function strips semicolons and double
+  quotes from character names. It also converts
+  all characters to lower case.
 }

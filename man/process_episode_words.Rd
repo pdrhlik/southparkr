@@ -7,8 +7,19 @@
 process_episode_words(lines, ratings, keep_stopwords = FALSE)
 }
 \arguments{
-\item{keep_stopwords}{}
+\item{lines}{\code{\link{episode_lines}}}
+
+\item{ratings}{\code{\link{imdb_ratings}}}
+
+\item{keep_stopwords}{If \code{TRUE}, (default \code{FALSE}), the dataset
+will contain stopwords after processing.}
+}
+\value{
+A data frame of words.
 }
 \description{
-Processes lines and ratings and creates a data frame usable for analyses.
+Each row of the data frame is a word spoken by a character in an episode.
+  Appart from data from \code{\link{episode_lines}} and \code{\link{imdb_ratings}},
+  it also contains a sentiment score, a word stem and a logical flag saying
+  if a word is a **swear** word or not.
 }

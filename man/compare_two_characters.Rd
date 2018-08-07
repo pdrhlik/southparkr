@@ -7,8 +7,17 @@
 compare_two_characters(char2, char1, words)
 }
 \arguments{
-\item{words}{}
+\item{char2}{Character name.}
+
+\item{char1}{Character name.}
+
+\item{words}{A data frame of words returned by
+\code{\link{process_episode_words}}.}
+}
+\value{
+A data frame of prop.test results.
 }
 \description{
-Compare two characters and decide which one is naughtier.
+It uses a proportion test (\code{\link[stats]{prop.test}}) to
+  determine if one character is naughtier than the other.
 }

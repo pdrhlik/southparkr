@@ -7,7 +7,14 @@
 top_n_characters(words, n)
 }
 \arguments{
-\item{n}{}
+\item{words}{A data frame of words returned by
+\code{\link{process_episode_words}}.}
+
+\item{n}{Numeric value - how many TOP talking
+characters to select.}
+}
+\value{
+Character vector of character names.
 }
 \description{
 Select top N talking characters.

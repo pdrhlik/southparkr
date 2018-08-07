@@ -7,7 +7,9 @@
 plot_character_sentiment(words, characters)
 }
 \arguments{
-\item{characters}{}
+\item{words}{A data frame of words from \code{\link{process_episode_words}}.}
+
+\item{characters}{Character vector of characters.}
 }
 \description{
 Plots sentiment over episodes for selected characters.

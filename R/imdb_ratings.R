@@ -82,7 +82,13 @@ fetch_ratings <- function(force_download = FALSE, make_rds = TRUE, delete_files 
 
 #' Fetch IMDB ratings for one season.
 #'
-#' @param season_number
+#' **DO NOT USE** - it violates IMDB conditions of use. It does
+#'   not allow web scraping. It provides datasets that can
+#'   be parsed accordingly.
+#'
+#' @seealso \code{\link{fetch_ratings}()} - use this function insted.
+#'
+#' @param season_number Numeric season number.
 fetch_season_ratings_old <- function(season_number) {
 	rating_url <- paste0("https://www.imdb.com/title/tt0121955/episodes?season=", season_number)
 	html <- xml2::read_html(rating_url)
@@ -112,7 +118,13 @@ fetch_season_ratings_old <- function(season_number) {
 
 #' Fetch ratings for all selected seasons.
 #'
-#' @param season_numbers
+#' **DO NOT USE** - it violates IMDB conditions of use. It does
+#'   not allow web scraping. It provides datasets that can
+#'   be parsed accordingly.
+#'
+#' @seealso \code{\link{fetch_ratings}()} - use this function insted.
+#'
+#' @param season_number Numeric season number.
 fetch_ratings_old <- function(season_numbers) {
 	result <- purrr::map_df(season_numbers, fetch_season_ratings)
 

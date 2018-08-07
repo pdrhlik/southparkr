@@ -2,13 +2,16 @@
 % Please edit documentation in R/scraper.R
 \name{fetch_all_episodes}
 \alias{fetch_all_episodes}
-\title{Fetch transcripts for all episodes.}
+\title{Fetch scripts for all episodes.}
 \usage{
 fetch_all_episodes(episode_list)
 }
 \arguments{
-\item{episode_list}{}
+\item{episode_list}{\code{\link{episode_list}} dataset.}
 }
-\description{
-Fetch transcripts for all episodes.
+\value{
+A data frame with episode lines.
+}
+\seealso{
+\code{\link{episode_lines}} dataset.
 }

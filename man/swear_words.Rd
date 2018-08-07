@@ -6,6 +6,11 @@
 \usage{
 swear_words()
 }
+\value{
+Character vector of swear words.
+}
 \description{
-List of words that are considered naughty.
+This function will be replaced in the future
+  by the \href{https://github.com/pdrhlik/sweary}{sweary}
+  package.
 }

@@ -2,13 +2,16 @@
 % Please edit documentation in R/scraper.R
 \name{fetch_episode}
 \alias{fetch_episode}
-\title{Fetch transcript for a single episode.}
+\title{Fetch script for a single episode.}
 \usage{
 fetch_episode(episode_link)
 }
 \arguments{
-\item{episode_link}{}
+\item{episode_link}{Link to a page with an episode script.}
 }
-\description{
-Fetch transcript for a single episode.
+\value{
+A data frame with episode lines.
+}
+\seealso{
+\code{\link{episode_lines}} dataset.
 }

@@ -2,10 +2,13 @@
 % Please edit documentation in R/scraper.R
 \name{fetch_episode_list}
 \alias{fetch_episode_list}
-\title{Fetch episode list.}
+\title{Fetch list of all episodes.}
 \usage{
 fetch_episode_list()
 }
-\description{
-Fetch episode list.
+\value{
+Data frame with list of episodes.
+}
+\seealso{
+\code{\link{episode_list}} dataset.
 }

@@ -2,14 +2,22 @@
 % Please edit documentation in R/plots.R
 \name{plot_swear_word_comparison}
 \alias{plot_swear_word_comparison}
-\title{Plot comparison of naughty words proportion among selected characters.}
+\title{Plot comparison of swear words proportion among selected characters.}
 \usage{
 plot_swear_word_comparison(main_character, other_characters, words,
   text_size = 30)
 }
 \arguments{
-\item{other_characters}{}
+\item{main_character}{South Park character to compare with others.}
+
+\item{other_characters}{Character vector of other characters.}
+
+\item{words}{A data frame of words from \code{\link{process_episode_words}}.}
+
+\item{text_size}{Numeric value that controls ggplot's text size.}
 }
 \description{
-Plot comparison of naughty words proportion among selected characters.
+It uses the \code{\link{compare_two_characters}} function but
+  compares more than two characters at once. After that, it
+  draws an errorbar plot to visually compare the results.
 }
