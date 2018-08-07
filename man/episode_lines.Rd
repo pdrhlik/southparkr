@@ -8,6 +8,9 @@
 \source{
 \url{https://southpark.wikia.com/wiki/Portal:Scripts}
 }
+\usage{
+episode_lines
+}
 \description{
 A dataset containing lines spoken by characters in an episode.
  It can be recreated using \code{\link{fetch_all_episodes}()}.

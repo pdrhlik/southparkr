@@ -8,6 +8,9 @@
 \source{
 \url{https://southpark.wikia.com/wiki/Portal:Scripts}
 }
+\usage{
+episode_list
+}
 \description{
 A dataset containing information about South Park episodes,
   seasons they belong to and links to their scripts. It can

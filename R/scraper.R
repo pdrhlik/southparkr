@@ -1,7 +1,5 @@
 #' Fetch episode list for a season
 #'
-#' @description NULL
-#'
 #' @param season_link Link to a page of season scripts.
 #'
 #' @seealso \code{\link{episode_list}} dataset.
@@ -31,8 +29,6 @@ fetch_season_episode_list <- function(season_link) {
 }
 
 #' Fetch list of all episodes.
-#'
-#' @description NULL
 #'
 #' @seealso \code{\link{episode_list}} dataset.
 #' @return Data frame with list of episodes.
@@ -68,8 +64,6 @@ fetch_episode_list <- function() {
 
 #' Fetch script for a single episode.
 #'
-#' @description NULL
-#'
 #' @param episode_link Link to a page with an episode script.
 #'
 #' @seealso \code{\link{episode_lines}} dataset.
@@ -92,7 +86,6 @@ fetch_episode <- function(episode_link) {
 
 #' Fetch scripts for all episodes.
 #'
-#' @description NULL
 #' @param episode_list \code{\link{episode_list}} dataset.
 #'
 #' @seealso \code{\link{episode_lines}} dataset.

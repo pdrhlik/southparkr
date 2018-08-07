@@ -7,7 +7,7 @@
 fetch_ratings_old(season_numbers)
 }
 \arguments{
-\item{season_number}{Numeric season number.}
+\item{season_numbers}{Numeric season number.}
 }
 \description{
 **DO NOT USE** - it violates IMDB conditions of use. It does

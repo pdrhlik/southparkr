@@ -12,6 +12,9 @@ fetch_season_episode_list(season_link)
 \value{
 Data frame with list of episodes.
 }
+\description{
+Fetch episode list for a season
+}
 \seealso{
 \code{\link{episode_list}} dataset.
 }

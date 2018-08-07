@@ -20,7 +20,6 @@
 #' }
 #'
 #' @docType data
-#' @usage NULL
 #' @source \url{https://southpark.wikia.com/wiki/Portal:Scripts}
 #' @format A data frame with 287 rows and 7 variables.
 "episode_list"
@@ -48,7 +47,6 @@
 #' }
 #'
 #' @docType data
-#' @usage NULL
 #' @source \url{https://southpark.wikia.com/wiki/Portal:Scripts}
 #' @format A data frame with 78701 rows and 9 variables.
 "episode_lines"
@@ -74,7 +72,6 @@
 #' }
 #'
 #' @docType data
-#' @usage NULL
 #' @source \url{https://www.imdb.com/interfaces/}
 #' @format A data frame with 308 rows and 7 variables.
 "imdb_ratings"

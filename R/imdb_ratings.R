@@ -124,7 +124,7 @@ fetch_season_ratings_old <- function(season_number) {
 #'
 #' @seealso \code{\link{fetch_ratings}()} - use this function insted.
 #'
-#' @param season_number Numeric season number.
+#' @param season_numbers Numeric season number.
 fetch_ratings_old <- function(season_numbers) {
 	result <- purrr::map_df(season_numbers, fetch_season_ratings)
 

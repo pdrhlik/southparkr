@@ -8,6 +8,14 @@
 \description{
 southparkr: South Park script crawler
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/pdrhlik/southparkr}
+  \item Report bugs at \url{https://github.com/pdrhlik/southparkr/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Patrik Drhlik \email{patrik.drhlik@gmail.com}
 

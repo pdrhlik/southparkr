@@ -9,6 +9,9 @@ fetch_episode_list()
 \value{
 Data frame with list of episodes.
 }
+\description{
+Fetch list of all episodes.
+}
 \seealso{
 \code{\link{episode_list}} dataset.
 }

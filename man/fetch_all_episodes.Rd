@@ -12,6 +12,9 @@ fetch_all_episodes(episode_list)
 \value{
 A data frame with episode lines.
 }
+\description{
+Fetch scripts for all episodes.
+}
 \seealso{
 \code{\link{episode_lines}} dataset.
 }
