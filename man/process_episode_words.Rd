@@ -4,10 +4,10 @@
 \alias{process_episode_words}
 \title{Processes lines and ratings and creates a data frame usable for analyses.}
 \usage{
-process_episode_words(lines, ratings)
+process_episode_words(lines, ratings, keep_stopwords = FALSE)
 }
 \arguments{
-\item{ratings}{}
+\item{keep_stopwords}{}
 }
 \description{
 Processes lines and ratings and creates a data frame usable for analyses.

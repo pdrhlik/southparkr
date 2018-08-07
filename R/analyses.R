@@ -13,17 +13,17 @@ swear_words <- function() {
 #'
 #' @param lines
 #' @param ratings
+#' @param keep_stopwords
 #'
 #' @return
 #' @export
-process_episode_words <- function(lines, ratings) {
+process_episode_words <- function(lines, ratings, keep_stopwords = FALSE) {
 	episode_words <- lines %>%
 		dplyr::mutate(
 			character = preprocess_characters(character),
 			text = preprocess_text(text)
 		) %>%
 		tidytext::unnest_tokens(word, text) %>%
-		dplyr::anti_join(tidytext::stop_words, by = "word") %>%
 		dplyr::filter(nchar(character) > 0) %>%
 		dplyr::mutate(
 			word_stem = SnowballC::wordStem(word),
@@ -35,6 +35,10 @@ process_episode_words <- function(lines, ratings) {
 				   "season_episode_number" = "season_episode_number")
 		) %>%
 		dplyr::left_join(tidytext::get_sentiments("afinn"))
+
+	if (keep_stopwords == FALSE) {
+		episode_words <- dplyr::anti_join(episode_words, tidytext::stop_words, by = "word")
+	}
 
 	return(episode_words)
 }
